@@ -29,8 +29,8 @@ jobs:
         env:
           LOCAL_PROPERTIES_PATH: secrete.properties
         run: |
-          echo "Contents of secrete.properties:"
-          cat $LOCAL_PROPERTIES_PATH
+          echo Contents of secrete.properties:
+          type secrete.properties
 
       - name: Build and test
         run: ./gradlew build
