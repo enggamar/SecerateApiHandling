@@ -20,11 +20,11 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Load local.properties
+      - name: Load secrete.properties
         env:
           LOCAL_PROPERTIES_CONTENTS: ${{ secrets.LOCAL_PROPERTIES_CONTENTS }}
         run: |
-          echo %LOCAL_PROPERTIES_CONTENTS% | base64 -d > local.properties
+          echo %LOCAL_PROPERTIES_CONTENTS% | base64 -d > secrete.properties
 
       - name: Build and test
         run: .\gradlew build

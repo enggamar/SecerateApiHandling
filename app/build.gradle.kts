@@ -1,6 +1,11 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+}
+val secreteProperties = Properties().apply {
+    load(rootProject.file("secrete.properties").inputStream())
 }
 
 android {
@@ -18,6 +23,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        val mySecretValue: String by extra(secreteProperties.getProperty("api_key"))
+
     }
 
     buildTypes {
