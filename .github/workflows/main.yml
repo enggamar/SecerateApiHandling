@@ -20,12 +20,12 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Load local.properties
+      - name: Load secrete.properties
         env:
           LOCAL_PROPERTIES_CONTENTS: ${{ secrets.LOCAL_PROPERTIES_CONTENTS }}
         run: |
-          echo "Decoding and writing local.properties file..."
-          echo $LOCAL_PROPERTIES_CONTENTS | base64 --decode > local.properties
+          echo "Decoding and writing secrete.properties file..."
+          echo $LOCAL_PROPERTIES_CONTENTS | base64 --decode > secrete.properties
           echo "Contents of local.properties:"
           cat local.properties
 
