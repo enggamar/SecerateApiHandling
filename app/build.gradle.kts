@@ -8,6 +8,7 @@ val secreteProperties = Properties().apply {
     load(rootProject.file("secrete.properties").inputStream())
 }
 
+
 android {
     namespace = "com.radiusagent.secerateapihandlingdemo"
     compileSdk = 34
@@ -23,7 +24,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        val mySecretValue: String by extra(secreteProperties.getProperty("api_key"))
+        buildConfigField("String", "API_KEY", "\"" + secreteProperties.getProperty("api_key") + "\"")
+        println("API_KEY"+ secreteProperties.getProperty("api_key"))
 
     }
 

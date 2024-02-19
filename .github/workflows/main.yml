@@ -3,12 +3,12 @@ name: Build and Test Android
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -18,13 +18,19 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '17'
+          java-version: '11'
 
-      - name: Load secrete.properties
+      - name: Load local.properties
         env:
           LOCAL_PROPERTIES_CONTENTS: ${{ secrets.LOCAL_PROPERTIES_CONTENTS }}
         run: |
-          echo %LOCAL_PROPERTIES_CONTENTS% | base64 -d > secrete.properties
+          echo "Decoding and writing local.properties file..."
+          echo $LOCAL_PROPERTIES_CONTENTS | base64 --decode > local.properties
+          echo "Contents of local.properties:"
+          cat local.properties
+
+      - name: Debug LOCAL_PROPERTIES_CONTENTS
+        run: echo $LOCAL_PROPERTIES_CONTENTS
 
       - name: Build and test
-        run: .\gradlew build
+        run: ./gradlew build

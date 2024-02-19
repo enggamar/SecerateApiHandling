@@ -15,7 +15,7 @@ import com.radiusagent.secerateapihandlingdemo.ui.theme.SecerateApiHandlingDemoT
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         setContent {
             SecerateApiHandlingDemoTheme {
                 // A surface container using the 'background' color from the theme
@@ -23,8 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
-                    Text(text = mySecretValue)
+                    Greeting(BuildConfig.API_KEY)
                 }
             }
         }
