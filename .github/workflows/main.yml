@@ -20,20 +20,17 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
+      - name: Create secrete.properties
+        run: |
+          echo "my_property=value123" > secrete.properties
+          echo "another_property=anotherValue456" >> secrete.properties
+
       - name: Load secrete.properties
         env:
-          LOCAL_PROPERTIES_CONTENTS: ${{ secrets.LOCAL_PROPERTIES_CONTENTS }}
+          LOCAL_PROPERTIES_PATH: secrete.properties
         run: |
-          echo "Decoding and writing secrete.properties file..."
-          echo $LOCAL_PROPERTIES_CONTENTS | base64 --decode > secrete.properties
-          echo "Contents of local.properties:"
-          cat local.properties
-
-      - name: Debug LOCAL_PROPERTIES_CONTENTS
-        run: echo $LOCAL_PROPERTIES_CONTENTS
-
-      - name: Build and test
-        run: ./gradlew build
+          echo "Contents of secrete.properties:"
+          cat $LOCAL_PROPERTIES_PATH
 
       - name: Build and test
         run: ./gradlew build
