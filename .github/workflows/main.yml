@@ -22,11 +22,11 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Load API Key
-        env:
-          API_KEY: ${{secrets.API_KEY}}
-        run:
-          echo "API_KEY=${secrets.API_KEY}" >> $GITHUB_ENV
+      - name: Build with Gradle
+        run: ./gradlew build
 
-      - name: Build and test
-        run: ./gradlew assembleDebug # or your build command
+      - name: Run tests
+        run: ./gradlew test
+
+      - name: Use secret API key
+        run: echo ${{ secrets.API_KEY }} > api_key.txt
