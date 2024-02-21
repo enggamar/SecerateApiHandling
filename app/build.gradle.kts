@@ -24,8 +24,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField("String", "API_KEY", "\"" + secreteProperties.getProperty("api.key") + "\"")
-        println("API_KEY"+ secreteProperties.getProperty("api.key"))
+        buildConfigField("String", "API_KEY", "\"" + secreteProperties.getProperty("Api.key") + "\"")
+        println("API_KEY"+ secreteProperties.getProperty("Api.key"))
 
     }
 
