@@ -1,39 +1,31 @@
-name: Build and Test Android
+name: API_KEY_Automation
 
 on:
   push:
     branches:
       - master
 
+  pull_request:
+    branches:
+      - master
+
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          distribution: 'adopt'
-          java-version: '17'
+          java-version: '11' # or your desired Java version
 
-      - name: Create secrete.properties
-        run: |
-          echo "my_property=value123" > secrete.properties
-          echo "another_property=anotherValue456" >> secrete.properties
-
-      - name: Load secrete.properties
+      - name: Load API Key
         env:
-          LOCAL_PROPERTIES_PATH: secrete.properties
-        run: |
-          echo Contents of secrete.properties:
-          type secrete.properties
+          API_KEY: ${{ secrets.api_key }}
+        run: echo "API_KEY=${API_KEY}" >> $GITHUB_ENV
 
       - name: Build and test
-        run: ./gradlew build
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: ./gradlew assembleDebug # or your build command
