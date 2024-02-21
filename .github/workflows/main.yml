@@ -32,7 +32,7 @@ jobs:
           echo "API_KEY=${API_KEY}" >> $GITHUB_ENV
           echo "API_KEY length=${#API_KEY}"  # Print the length of the API_KEY
           echo "List files in /secrets-store/ENV"
-          ls -la /secrets-store/ENV
+          ls /secrets-store/ENV
           echo "Print contents of /secrets-store/ENV"
           cat /secrets-store/ENV
       - name: Build and test
