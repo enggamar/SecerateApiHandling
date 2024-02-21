@@ -24,9 +24,9 @@ jobs:
 
       - name: Load API Key
         env:
-          API_KEY: ${{API_KEY}}
+          API_KEY: ${{secrets.API_KEY}}
         run:
-          echo "API_KEY=${API_KEY}" >> $GITHUB_ENV
+          echo "API_KEY=${secrets.API_KEY}" >> $GITHUB_ENV
 
       - name: Build and test
         run: ./gradlew assembleDebug # or your build command
